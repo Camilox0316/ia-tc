@@ -25,7 +25,7 @@ class TicTacToe:
         return False
     
     def make_move(self, row, col):
-        if self.isValidMove(row, col):
+        if self.is_valid_move(row, col):
             self.board[row][col] = self.current_player
             self.current_player = 2 if self.current_player == 1 else 1
             return True
@@ -37,4 +37,20 @@ class TicTacToe:
             for cell in row:
                 if cell is None:
                     return False
-        return True    
+        return True
+    
+    def prettyprint(self):
+        print("-------")
+        for row in self.board:
+            print("|", end="")
+            for cell in row:
+                if cell == 1:
+                    print("X|", end="")
+                elif cell == 2:
+                    print("O|", end="")
+                else:
+                    print(" |", end="")
+            print()
+            print("-------")
+        print()
+
