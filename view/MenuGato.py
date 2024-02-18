@@ -1,6 +1,6 @@
 import customtkinter as ctk
 import GatoGame
-
+import Simulation
 def open_tic_tac_toe_mode_selection(root):
     # Ocultar la ventana principal
     root.withdraw()
@@ -17,6 +17,13 @@ def open_tic_tac_toe_mode_selection(root):
         game_interface = GatoGame.TicTacToeInterface(root, tic_tac_toe)
         game_interface.grab_set()  # Hace que la ventana de juego sea modal
 
+    def open_simulation_interface():
+        # Cierra la ventana de selección de modo de juego antes de abrir la de simulación
+        simulation_interface = Simulation.SimulationInterface(root)
+        simulation_interface.grab_set()
+
+
+
     # Agregar botones para cada modo de juego
     minimax_vs_random_button = ctk.CTkButton(mode_selection_window, text="Minimax vs Random", command=lambda: start_game("Minimax vs Random", mode_selection_window))
     minimax_vs_random_button.pack(pady=10)
@@ -28,7 +35,7 @@ def open_tic_tac_toe_mode_selection(root):
     minimax_vs_minimax_button.pack(pady=10)
 
 
-    simulation_button = ctk.CTkButton(mode_selection_window, text="Simulación", command=lambda: print("Simulación"))
+    simulation_button = ctk.CTkButton(mode_selection_window, text="Simulación", command=lambda: open_simulation_interface())
     simulation_button.pack(pady=10)
 
     # Definir la acción al cerrar la ventana de selección
