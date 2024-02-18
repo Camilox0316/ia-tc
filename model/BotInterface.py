@@ -6,3 +6,4 @@ class BotInterface:
         :return: La posición (x, y) donde el bot quiere hacer su movimiento.
         """
         raise NotImplementedError
+
