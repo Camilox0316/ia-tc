@@ -1,4 +1,9 @@
-class BotInterface():
+class BotInterface:
     def make_move(self, board):
-        # returns the row and column of the move (i, j)
-        raise NotImplementedError("make_move not implemented")
+        """
+        Realiza un movimiento en el tablero.
+        :param board: El estado actual del tablero.
+        :return: La posición (x, y) donde el bot quiere hacer su movimiento.
+        """
+        raise NotImplementedError
+
