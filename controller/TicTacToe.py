@@ -1,4 +1,4 @@
-import model.BotInterface as BotInterface
+from ..model import BotInterface
 class TicTacToe:
     def __init__(self, player1: BotInterface, player2: BotInterface):
         self.board = [[None for _ in range(3)] for _ in range(3)]
