@@ -6,8 +6,9 @@ def open_maze():
 
 # Función para el evento de clic en el botón Tic Tac Toe
 def open_tic_tac_toe():
+   # Función para el evento de clic en el botón Tic Tac Toecls
     print("Abrir Tic Tac Toe")
-    MenuGato.open_tic_tac_toe_mode_selection()
+    MenuGato.open_tic_tac_toe_mode_selection(root)  
 
 # Configurar el estilo de customtkinter
 ctk.set_appearance_mode("dark")  # Opciones: "light", "dark"
