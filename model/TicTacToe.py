@@ -1,8 +1,11 @@
 class TicTacToe:
-    def __init__(self):
-        self.board = [[None for _ in range(3)] for _ in range(3)]
+    def __init__(self, board=None, current_player=1):
+        if board is not None: 
+            self.board = [[None for _ in range(3)] for _ in range(3)]
+        else: 
+            self.board = board
         # 1 -> X, 2 -> O
-        self.current_player = 1
+        self.current_player = current_player
 
     def is_valid_move(self, row, col):
         return self.board[row][col] is None
@@ -54,3 +57,10 @@ class TicTacToe:
             print("-------")
         print()
 
+    def get_new_ttt(self, row, col):
+        new_board = [[cell for cell in row] for row in self.board]
+        new_board[row][col] = self.current_player
+        return TicTacToe(new_board, 2 if self.current_player == 1 else 1)
+    
+    def get_available_moves(self):
+        return [(i, j) for i in range(3) for j in range(3) if self.board[i][j] is None]
