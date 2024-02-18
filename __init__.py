@@ -8,6 +8,8 @@ def main():
 
 if __name__ == "__main__":
     main()
-    gato("hola","mundo").play_game()
+    gatito = gato("hola","mundo")
+    gatito.print_board()
+   
 
 

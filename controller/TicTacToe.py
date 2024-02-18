@@ -10,3 +10,13 @@ class TicTacToe:
         print("Soy Tic tac toe")
         # Lógica para jugar el juego, alternando entre los bots.
         pass
+    def print_board(self):
+        for row in self.board:
+            row_display = "|"
+            for cell in row:
+                if cell is None:
+                    row_display += "   |"
+                else:
+                    row_display += f" {cell} |"
+            print(row_display)
+            print("-------------")  # Asume un tablero de 3x3
