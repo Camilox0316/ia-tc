@@ -1,6 +1,6 @@
 class TicTacToe:
     def __init__(self, board=None, current_player=1):
-        if board is not None: 
+        if board is None: 
             self.board = [[None for _ in range(3)] for _ in range(3)]
         else: 
             self.board = board
@@ -10,21 +10,17 @@ class TicTacToe:
     def is_valid_move(self, row, col):
         return self.board[row][col] is None
 
-    def invert(self): 
-        # for minmax, invert the board (1 -> 2, 2 -> 1)
-        return [[(1 if cell == 2 else 2) if cell is not None else None for cell in row] for row in self.board]
-
     def is_win(self):
-        # returns true if the last move was a winning move
+        # returns the winner if the last move was a winning move, else False
         for i in range(3):
             if self.board[i][0] == self.board[i][1] == self.board[i][2] and self.board[i][0] is not None:
-                return True
+                return self.board[i][0]
             if self.board[0][i] == self.board[1][i] == self.board[2][i] and self.board[0][i] is not None:
-                return True
+                return self.board[0][i]
         if self.board[0][0] == self.board[1][1] == self.board[2][2] and self.board[0][0] is not None:
-            return True
+            return self.board[0][0]
         if self.board[0][2] == self.board[1][1] == self.board[2][0] and self.board[0][2] is not None:
-            return True
+            return self.board[0][2]
         return False
     
     def make_move(self, row, col):
@@ -33,6 +29,10 @@ class TicTacToe:
             self.current_player = 2 if self.current_player == 1 else 1
             return True
         return False
+    
+    def undo_move(self, row, col):
+        self.board[row][col] = None
+        self.current_player = 2 if self.current_player == 1 else 1
     
     def is_draw(self):
         # only works after is_win
@@ -64,3 +64,6 @@ class TicTacToe:
     
     def get_available_moves(self):
         return [(i, j) for i in range(3) for j in range(3) if self.board[i][j] is None]
+    
+    def getBoard(self):
+        return str(self.board)
