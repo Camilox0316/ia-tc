@@ -1,21 +1,25 @@
 from model.TicTacToe import TicTacToe
 from model.RandomBot import RandomBot
+from model.MinMaxBot import MinMaxBot
+from model.BoardMemo import BoardMemo
 class GameController: 
 
     def simulateGames(self):
         randomBot = RandomBot()
-        minMaxBot = RandomBot() # not implemented yet
-        wins, losses, draws = self.tournament(minMaxBot, randomBot)
+        firstPlayerMemo = BoardMemo()
+        secondPlayerMemo = BoardMemo()
+
+        wins, losses, draws = self.tournament(MinMaxBot(1, firstPlayerMemo), randomBot)
         print("MinMaxBot vs RandomBot")
         print("Wins:", wins)
         print("Losses:", losses)
         print("Draws:", draws)
-        wins, losses, draws = self.tournament(randomBot, minMaxBot)
+        wins, losses, draws = self.tournament(randomBot, MinMaxBot(2, secondPlayerMemo))
         print("RandomBot vs MinMaxBot")
         print("Wins:", wins)
         print("Losses:", losses)
         print("Draws:", draws)
-        wins, loses, draws = self.tournament(minMaxBot, minMaxBot)
+        wins, losses, draws = self.tournament(MinMaxBot(1, firstPlayerMemo), MinMaxBot(2, secondPlayerMemo))
         print("MinMaxBot vs MinMaxBot")
         print("Wins:", wins)
         print("Losses:", losses)
