@@ -1,6 +1,6 @@
 class TicTacToe:
     def __init__(self, board=None, current_player=1):
-        if board is not None: 
+        if board is None: 
             self.board = [[None for _ in range(3)] for _ in range(3)]
         else: 
             self.board = board
