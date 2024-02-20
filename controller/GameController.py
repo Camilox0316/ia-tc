@@ -29,7 +29,6 @@ class GameController:
         print("Losses:", losses)
         print("Draws:", draws)
         results.append(["MinMaxBot vs MinMaxBot",wins, losses, draws])
-        print(results)
         return results
 
     def tournament(self, bot1, bot2, n=500):

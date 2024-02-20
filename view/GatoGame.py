@@ -1,9 +1,13 @@
 import customtkinter as ctk
-
+from model.TicTacToe import TicTacToe
 class TicTacToeInterface(ctk.CTkToplevel):
-    def __init__(self, parent, tic_tac_toe):
+    def __init__(self, parent, Bot1, Bot2):
         super().__init__(parent)
-        self.tic_tac_toe = tic_tac_toe
+        self.isEnd = False
+        self.Turno = 1
+        self.game = TicTacToe()
+        self.Bot1 = Bot1
+        self.Bot2 = Bot2
         self.title("Juego Tic Tac Toe")
         self.geometry("400x400")
 
@@ -33,12 +37,41 @@ class TicTacToeInterface(ctk.CTkToplevel):
         print(f"Botón presionado: {i}, {j}")
 
     def pass_turn(self):
-        print("Turno pasado")
+        if self.isEnd == False:
+            game = self.game
+            if self.Turno == 1: 
+                self.Turno = 0
+                row, column = self.Bot1.make_move(game)
+                game.make_move(row, column)
+                if game.is_win() or game.is_draw():
+                    self.refresh_board()
+                    self.isEnd = True
+                    return 1
+                
+            else:
+                self.Turno = 1
+                row, col = self.Bot2.make_move(game)
+                game.make_move(row, col)
+                if game.is_win() or game.is_draw():
+                    self.refresh_board()
+                    self.isEnd = True
+                    return 0
+            self.refresh_board()  # Actualiza la interfaz gráfica para reflejar el estado actual del tablero
 
-# Suponiendo que tienes una instancia de tu juego TicTacToe llamada tic_tac_toe
-# tic_tac_toe = [[0,0,0],[0,0,0],[0,0,0]]  # Ejemplo de matriz 3x3 para el juego
+    def refresh_board(self):
+        board = self.game.getBoard()
+        if isinstance(board, str):
+            board = eval(board)  # Solo si es absolutamente necesario y getBoard() devuelve una cadena
 
-# Para demostrar, crearíamos la interfaz así:
-# root = ctk.CTk()
-# game_interface = TicTacToeInterface(root, tic_tac_toe)
-# game_interface.mainloop()
+        print("Estructura del tablero:", board)
+
+        for i in range(3):
+            for j in range(3):
+                cell = board[i][j]  # Accede directamente al valor de la celda
+
+                if cell is None:
+                    self.buttons[i][j].configure(text="")
+                elif cell == 1:
+                    self.buttons[i][j].configure(text="X")
+                elif cell == 2:
+                    self.buttons[i][j].configure(text="O")
