@@ -60,8 +60,4 @@ class Simulation(ctk.CTkToplevel):
                     self.min_max_min_max_results[j].configure(text=str(result))
         pass
 
-# Código para crear y mostrar la ventana de simulación
-# root = ctk.CTk()
-# simulation_interface = SimulationInterface(root)
-# simulation_interface.grab_set()
-# simulation_interface.mainloop()
+
