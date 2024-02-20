@@ -1,4 +1,6 @@
 from controller.GameController import GameController
+from view.MainPage import MainApplication
+
 
 def main():    
     gc = GameController()
@@ -6,6 +8,7 @@ def main():
 
     pass
 if __name__ == "__main__":
-    main()
+    MainApplication().mainloop()
+
 
 

@@ -8,22 +8,29 @@ class GameController:
         randomBot = RandomBot()
         firstPlayerMemo = BoardMemo()
         secondPlayerMemo = BoardMemo()
+        results = [] 
+        
 
         wins, losses, draws = self.tournament(MinMaxBot(1, firstPlayerMemo), randomBot)
         print("MinMaxBot vs RandomBot")
         print("Wins:", wins)
         print("Losses:", losses)
         print("Draws:", draws)
+        results.append(["MinMaxBot vs RandomBot",wins, losses, draws])
         wins, losses, draws = self.tournament(randomBot, MinMaxBot(2, secondPlayerMemo))
         print("RandomBot vs MinMaxBot")
         print("Wins:", wins)
         print("Losses:", losses)
         print("Draws:", draws)
+        results.append(["RandomBot vs MinMaxBot",wins, losses, draws])
         wins, losses, draws = self.tournament(MinMaxBot(1, firstPlayerMemo), MinMaxBot(2, secondPlayerMemo))
         print("MinMaxBot vs MinMaxBot")
         print("Wins:", wins)
         print("Losses:", losses)
         print("Draws:", draws)
+        results.append(["MinMaxBot vs MinMaxBot",wins, losses, draws])
+        print(results)
+        return results
 
     def tournament(self, bot1, bot2, n=500):
         bot1_wins = 0

@@ -1,6 +1,6 @@
 import customtkinter as ctk
-
-class SimulationInterface(ctk.CTkToplevel):
+from controller.GameController import GameController
+class Simulation(ctk.CTkToplevel):
     def __init__(self, parent):
         super().__init__(parent)
         self.title("Simulación de Juegos")
@@ -14,11 +14,6 @@ class SimulationInterface(ctk.CTkToplevel):
         self.create_widgets()
 
     def create_widgets(self):
-        # Input para la cantidad de simulaciones y su etiqueta
-        self.simulation_count_label = ctk.CTkLabel(self, text="Número de Simulaciones:")
-        self.simulation_count_label.grid(row=0, column=0, columnspan=2)
-        self.simulation_count_entry = ctk.CTkEntry(self)
-        self.simulation_count_entry.grid(row=0, column=2, columnspan=2)
 
         # Botón para realizar la simulación
         self.run_simulation_button = ctk.CTkButton(self, text="Iniciar Simulación", command=self.run_simulation)
@@ -47,10 +42,22 @@ class SimulationInterface(ctk.CTkToplevel):
 
     def run_simulation(self):
         # Lógica para realizar las simulaciones y actualizar los resultados
+        gc = GameController()
+        results= gc.simulateGames()
+        self.update_results(results)
         pass
 
     def update_results(self, results):
-        # Actualizar los resultados de la tabla
+        for i, result_set in enumerate(results):
+            if i == 0:
+                for j, result in enumerate(result_set):
+                    self.min_max_random_results[j].configure(text=str(result))
+            elif i == 1:
+                for j, result in enumerate(result_set):
+                    self.random_min_max_results[j].configure(text=str(result))
+            elif i == 2:
+                for j, result in enumerate(result_set):
+                    self.min_max_min_max_results[j].configure(text=str(result))
         pass
 
 # Código para crear y mostrar la ventana de simulación
