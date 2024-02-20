@@ -43,10 +43,22 @@ class TicTacToeModeSelectionWindow:
         if mode == "Minimax vs Random":
             bot1 = MinMaxBot(1)
             bot2 = RandomBot()
-            print ("Minimax vs Random")
             print(f"Iniciando juego en modo: {mode}")
             game_interface = TicTacToeInterface(self.mode_selection_window,  bot1, bot2)
             game_interface.grab_set()  # Hace que la ventana de juego sea modal
+        elif mode == "Random vs Minimax":
+            bot1 = RandomBot()
+            bot2 = MinMaxBot(3)
+            print(f"Iniciando juego en modo: {mode}")
+            game_interface = TicTacToeInterface(self.mode_selection_window,  bot1, bot2)
+            game_interface.grab_set()  # Hace que la ventana de juego sea modal
+        else:
+            bot1 = MinMaxBot(1)
+            bot2 = MinMaxBot(2)
+            print(f"Iniciando juego en modo: {mode}")
+            game_interface = TicTacToeInterface(self.mode_selection_window,  bot1, bot2)
+            game_interface.grab_set()
+
 
     def open_simulation_interface(self):
         # Cierra la ventana de selección de modo de juego antes de abrir la de simulación
