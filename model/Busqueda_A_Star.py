@@ -1,8 +1,9 @@
-import colorsys
+import time
+import timeit
 from pyamaze import maze,agent
 from queue import PriorityQueue
 from random import randint
-MAZE_SIZE = 15
+MAZE_SIZE = 20
 def manhattan_distance(goal:tuple, current:tuple) -> int :
     """
     Returns the Manhattan distance between two points.
@@ -77,6 +78,7 @@ def A_Star(pmaze:maze, goal:tuple, agent:tuple) -> tuple:
         final_path[star_path[cell]] = cell
         cell = star_path[cell]
     # Retorna un diccionario vacío si no se encuentra un camino.
+    
     return final_path
 
 # Función para crear un laberinto con una posición de meta y agente aleatorias.
@@ -108,10 +110,17 @@ def setAgent(goal:tuple, size:int)->tuple:
 # Función principal que crea el laberinto, ejecuta A* y traza el camino.
 def main():
     myMaze = createMaze(MAZE_SIZE)
+    #begin_time = time.time()
     path = A_Star(myMaze["maze"], myMaze["goal"], myMaze["agent"])
+    #end_time = time.time()
+    print(f"El largo de la ruta es: {len(path)}")
     myMaze["maze"].tracePath({myMaze["realAgent"] : myMaze["maze"].path})
     myMaze["maze"].run()
-    
+    #print(f"Tiempo de ejecución: {end_time-begin_time} segundos.")
     return 
+
 if __name__ == "__main__":
+    #execution_time = timeit.timeit(main, number=100)/100
+    #print(f"Tiempo de ejecución promedio: {execution_time} segundos")
+    
     main()
