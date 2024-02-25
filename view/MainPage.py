@@ -1,7 +1,7 @@
 import customtkinter as ctk
 from view.MenuGato import TicTacToeModeSelectionWindow
 from view.MazeInterface import MazeInterface
-from pyamaze import maze
+from pyamaze import maze,agent
 
 class MainApplication(ctk.CTk):
     def __init__(self, *args, **kwargs):
@@ -36,8 +36,10 @@ class MainApplication(ctk.CTk):
         self.destroy()  
         
         # Ahora crea la interfaz del laberinto y la ejecuta
-        m=maze()
-        m.CreateMaze()
+        m=maze(20,20)
+        m.CreateMaze(loopPercent=50)
+        a=agent(m,filled=True,footprints=True)
+        m.tracePath({a:m.path})
         m.run()
 
     def open_tic_tac_toe(self):

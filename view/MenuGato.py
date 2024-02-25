@@ -48,7 +48,7 @@ class TicTacToeModeSelectionWindow:
             game_interface.grab_set()  # Hace que la ventana de juego sea modal
         elif mode == "Random vs Minimax":
             bot1 = RandomBot()
-            bot2 = MinMaxBot(3)
+            bot2 = MinMaxBot(2)
             print(f"Iniciando juego en modo: {mode}")
             game_interface = TicTacToeInterface(self.mode_selection_window,  bot1, bot2)
             game_interface.grab_set()  # Hace que la ventana de juego sea modal
